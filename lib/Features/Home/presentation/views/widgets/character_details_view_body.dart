@@ -4,7 +4,7 @@ import 'character_info.dart';
 import 'custom_divider.dart';
 import '../../../../../Core/utils/constants.dart';
 
-import '../../../data/models/character/result.dart';
+import '../../../dataaa/models/character/result.dart';
 
 class CharacterDetailsViewBody extends StatelessWidget {
   const CharacterDetailsViewBody(

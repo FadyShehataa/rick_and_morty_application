@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../data/models/character/character_model.dart';
+import '../../../dataaa/models/character/character_model.dart';
 
-import '../../../data/models/character/result.dart';
-import '../../../data/repos/home_repo.dart';
+import '../../../dataaa/models/character/result.dart';
+import '../../../dataaa/repos/home_repo.dart';
 
 part 'character_state.dart';
 

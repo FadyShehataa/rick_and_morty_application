@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../Core/utils/styles.dart';
-import '../../../data/models/character/result.dart';
+import '../../../dataaa/models/character/result.dart';
 
 import '../../../../../Core/utils/my_colors.dart';
 

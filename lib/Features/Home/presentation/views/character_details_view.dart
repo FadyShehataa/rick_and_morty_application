@@ -3,7 +3,7 @@ import '../../../../Core/utils/my_colors.dart';
 import 'widgets/character_details_view_app_bar.dart';
 import 'widgets/character_details_view_body.dart';
 
-import '../../data/models/character/result.dart';
+import '../../dataaa/models/character/result.dart';
 
 class CharacterDetailsView extends StatelessWidget {
   const CharacterDetailsView({super.key, required this.characterResultModel});

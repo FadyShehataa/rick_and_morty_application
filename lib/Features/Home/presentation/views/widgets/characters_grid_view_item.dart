@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../Core/utils/app_router.dart';
 import '../../../../../Core/utils/constants.dart';
 import '../../../../../Core/utils/styles.dart';
-import '../../../data/models/character/result.dart';
+import '../../../dataaa/models/character/result.dart';
 
 class CharactersGridViewItem extends StatelessWidget {
   const CharactersGridViewItem({super.key, required this.characterResultModel});
