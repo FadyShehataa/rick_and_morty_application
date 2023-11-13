@@ -3,6 +3,6 @@ import 'package:rick_and_morty_application/Features/Home/Domain/Entities/charact
 
 import '../../../../Core/errors/failures.dart';
 
-abstract class CharacterRepo {
+abstract class HomeRepo {
   Future<Either<Failure, List<CharacterEntity>>> fetchCharacters();
 }
