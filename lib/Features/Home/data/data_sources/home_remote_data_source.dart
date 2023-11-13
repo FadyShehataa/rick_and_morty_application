@@ -3,20 +3,22 @@
 import 'package:rick_and_morty_application/Features/Home/Domain/Entities/character_entity.dart';
 
 import '../../../../Core/utils/api_service.dart';
+import '../../../../Core/utils/functions/save_characters_data.dart';
 import '../models/character_model/character_model.dart';
 
-abstract class HomeLocalDataSource {
+abstract class HomeRemoteDataSource {
   Future<List<CharacterEntity>> fetchCharacters();
 }
 
-class HomeLocalDataSourceImpl implements HomeLocalDataSource {
+class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   ApiService apiService;
-  HomeLocalDataSourceImpl({required this.apiService});
+  HomeRemoteDataSourceImpl({required this.apiService});
 
   @override
   Future<List<CharacterEntity>> fetchCharacters() async {
     var data = await apiService.get(endPoint: 'character?page=1');
     List<CharacterEntity> characters = parseCharacters(data);
+    saveCharactersData(characters);
     return characters;
   }
 
