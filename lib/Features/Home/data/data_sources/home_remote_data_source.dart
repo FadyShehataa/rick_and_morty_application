@@ -3,11 +3,10 @@
 import 'package:rick_and_morty_application/Features/Home/Domain/Entities/character_entity.dart';
 
 import '../../../../Core/utils/api_service.dart';
-import '../../../../Core/utils/functions/save_characters_data.dart';
 import '../models/character_model/character_model.dart';
 
 abstract class HomeRemoteDataSource {
-  Future<List<CharacterEntity>> fetchCharacters();
+  Future<List<CharacterEntity>> fetchCharacters({required int pageNumber});
 }
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
@@ -15,10 +14,11 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   HomeRemoteDataSourceImpl({required this.apiService});
 
   @override
-  Future<List<CharacterEntity>> fetchCharacters() async {
-    var data = await apiService.get(endPoint: 'character?page=1');
+  Future<List<CharacterEntity>> fetchCharacters(
+      {required int pageNumber}) async {
+    var data = await apiService.get(endPoint: 'character?page=$pageNumber');
     List<CharacterEntity> characters = parseCharacters(data);
-    saveCharactersData(characters);
+    // saveCharactersData(characters);
     return characters;
   }
 
@@ -26,6 +26,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
     List<CharacterEntity> characters = [];
     for (var item in data['results']) {
       characters.add(CharacterModel.fromJson(item));
+      print('character id: ${item['id']}');
     }
     return characters;
   }

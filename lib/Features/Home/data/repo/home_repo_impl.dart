@@ -17,11 +17,13 @@ class HomeRepoImpl extends HomeRepo {
   });
 
   @override
-  Future<Either<Failure, List<CharacterEntity>>> fetchCharacters() async {
+  Future<Either<Failure, List<CharacterEntity>>> fetchCharacters(
+      {required int pageNumber}) async {
     try {
       List<CharacterEntity> characters = homeLocalDataSource.fetchCharacters();
       if (characters.isEmpty) {
-        characters = await homeRemoteDataSource.fetchCharacters();
+        characters =
+            await homeRemoteDataSource.fetchCharacters(pageNumber: pageNumber);
       }
 
       return right(characters);

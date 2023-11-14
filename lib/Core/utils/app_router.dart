@@ -25,7 +25,7 @@ abstract class AppRouter {
         builder: (context, state) => BlocProvider(
           create: (context) => CharactersCubit(
             FetchCharactersUseCase(homeRepo: getIt.get<HomeRepoImpl>()),
-          )..fetchCharacters(),
+          )..fetchCharacters(pageNumber: 1),
           child: const HomeView(),
         ),
       ),

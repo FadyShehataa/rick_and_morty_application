@@ -10,8 +10,8 @@ class CharactersCubit extends Cubit<CharactersState> {
 
   final FetchCharactersUseCase fetchCharactersUseCase;
 
-  late final List<CharacterEntity> characters;
-  late List<CharacterEntity> searchedCharacters = [];
+  List<CharacterEntity> characters = [];
+  List<CharacterEntity> searchedCharacters = [];
 
   Future<void> searchCharacter(String query) async {
     emit(CharactersSearching());
@@ -23,15 +23,27 @@ class CharactersCubit extends Cubit<CharactersState> {
     emit(CharactersSuccess());
   }
 
-  Future<void> fetchCharacters() async {
-    emit(CharactersLoading());
-    var result = await fetchCharactersUseCase.call();
+  Future<void> fetchCharacters({required int pageNumber}) async {
+    if (pageNumber == 1) {
+      emit(CharactersLoading());
+    } else {
+      emit(CharactersPaginationLoading());
+    }
+
+    var result = await fetchCharactersUseCase.call(pageNumber);
 
     result.fold(
-      (failure) => emit(CharactersFailure(errMessage: failure.errMessage)),
+      (failure) {
+        if (pageNumber == 1) {
+          emit(CharactersFailure(errMessage: failure.errMessage));
+        } else {
+          emit(CharactersPaginationFailure(errMessage: failure.errMessage));
+        }
+      },
       (characters) {
         searchedCharacters = characters;
-        this.characters = characters;
+        this.characters.addAll(characters);
+        print('number of characters: ${this.characters.length}');
         emit(CharactersSuccess());
       },
     );
