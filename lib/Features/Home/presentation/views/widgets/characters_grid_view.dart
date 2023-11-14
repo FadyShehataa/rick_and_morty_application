@@ -45,11 +45,9 @@ class _CharactersGridViewState extends State<CharactersGridView> {
       // Check if the previous request is completed
       if (!isLoading) {
         isLoading = true;
-        print("hi");
+        if(nextPage > 42) return; // 42 is the last page
         await BlocProvider.of<CharactersCubit>(context)
             .fetchCharacters(pageNumber: nextPage++);
-        print('page number = $nextPage');
-        print('end');
         isLoading = false;
       }
     }

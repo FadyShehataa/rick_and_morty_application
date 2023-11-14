@@ -27,7 +27,6 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
     List<CharacterEntity> characters = [];
     for (var item in data['results']) {
       characters.add(CharacterModel.fromJson(item));
-      print('character id: ${item['id']}');
     }
     return characters;
   }

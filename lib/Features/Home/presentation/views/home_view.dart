@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:rick_and_morty_application/Core/utils/constants.dart';
-import 'package:rick_and_morty_application/Features/Home/Domain/Entities/character_entity.dart';
 import '../../../../Core/utils/my_colors.dart';
 import '../../../../Core/utils/styles.dart';
 import '../../../../Core/widgets/custom_loading_widget.dart';
@@ -55,11 +52,7 @@ class _HomeViewState extends State<HomeView> {
       return [
         IconButton(
           // onPressed: startSearching,
-          onPressed: () {
-            // characterBox
-            print(
-                ' length = ${Hive.box<CharacterEntity>(kCharactersBox).values.toList().length}');
-          }, // TODO
+          onPressed: () {},
           icon: const Icon(Icons.search),
         )
       ];

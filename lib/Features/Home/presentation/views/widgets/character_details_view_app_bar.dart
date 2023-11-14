@@ -25,7 +25,7 @@ class CharacterDetailsViewAppBar extends StatelessWidget {
           ),
         ),
         background: Hero(
-          tag: characterEntity.characterName!, // TODO
+          tag: characterEntity.characterImage!,
           child: Image.network(
             characterEntity.characterImage!,
             fit: BoxFit.fill,

@@ -43,7 +43,6 @@ class CharactersCubit extends Cubit<CharactersState> {
       (characters) {
         searchedCharacters = characters;
         this.characters.addAll(characters);
-        print('number of characters: ${this.characters.length}');
         emit(CharactersSuccess());
       },
     );

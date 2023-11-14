@@ -22,8 +22,7 @@ class CharactersGridViewItem extends StatelessWidget {
             .push(AppRouter.kCharacterDetailsView, extra: characterEntity);
       },
       child: Hero(
-        // tag: characterEntity.id!, // TODO
-        tag: characterEntity.characterName!,
+        tag: characterEntity.characterImage!,
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
