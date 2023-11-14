@@ -20,7 +20,7 @@ class HomeRepoImpl extends HomeRepo {
   Future<Either<Failure, List<CharacterEntity>>> fetchCharacters(
       {required int pageNumber}) async {
     try {
-      List<CharacterEntity> characters = homeLocalDataSource.fetchCharacters();
+      List<CharacterEntity> characters = homeLocalDataSource.fetchCharacters(pageNumber: pageNumber);
       if (characters.isEmpty) {
         characters =
             await homeRemoteDataSource.fetchCharacters(pageNumber: pageNumber);

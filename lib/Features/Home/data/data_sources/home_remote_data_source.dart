@@ -3,6 +3,7 @@
 import 'package:rick_and_morty_application/Features/Home/Domain/Entities/character_entity.dart';
 
 import '../../../../Core/utils/api_service.dart';
+import '../../../../Core/utils/functions/save_characters_data.dart';
 import '../models/character_model/character_model.dart';
 
 abstract class HomeRemoteDataSource {
@@ -18,7 +19,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       {required int pageNumber}) async {
     var data = await apiService.get(endPoint: 'character?page=$pageNumber');
     List<CharacterEntity> characters = parseCharacters(data);
-    // saveCharactersData(characters);
+    saveCharactersData(characters);
     return characters;
   }
 
