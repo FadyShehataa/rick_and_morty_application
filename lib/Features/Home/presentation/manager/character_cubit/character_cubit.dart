@@ -41,8 +41,8 @@ class CharactersCubit extends Cubit<CharactersState> {
         }
       },
       (characters) {
-        searchedCharacters = characters;
         this.characters.addAll(characters);
+        searchedCharacters = characters;
         emit(CharactersSuccess());
       },
     );

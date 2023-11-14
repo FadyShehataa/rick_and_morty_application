@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import '../../../../Core/utils/my_colors.dart';
 import '../../../../Core/utils/styles.dart';
 import '../../../../Core/widgets/custom_loading_widget.dart';
 import '../../../../Core/widgets/no_internet_widget.dart';
+import '../manager/character_cubit/character_cubit.dart';
 import 'widgets/home_view_body.dart';
 
 class HomeView extends StatefulWidget {
@@ -26,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
 
   // function to stop searching (BackButton)
   void stopSearching() {
-    // BlocProvider.of<CharactersCubit>(context).searchCharacter(''); // TODO
+    BlocProvider.of<CharactersCubit>(context).searchCharacter('');
     searchController!.clear();
     setState(() => isSearching = false);
   }
@@ -37,13 +39,12 @@ class _HomeViewState extends State<HomeView> {
       return [
         IconButton(
           onPressed: () {
-            // TODO
-            // if (searchController!.text.isNotEmpty) {
-            //   searchController!.clear();
-            //   BlocProvider.of<CharactersCubit>(context).searchCharacter('');
-            // } else {
-            //   Navigator.pop(context);
-            // }
+            if (searchController!.text.isNotEmpty) {
+              searchController!.clear();
+              BlocProvider.of<CharactersCubit>(context).searchCharacter('');
+            } else {
+              Navigator.pop(context);
+            }
           },
           icon: const Icon(Icons.close),
         )
@@ -51,8 +52,7 @@ class _HomeViewState extends State<HomeView> {
     } else {
       return [
         IconButton(
-          // onPressed: startSearching,
-          onPressed: () {},
+          onPressed: startSearching,
           icon: const Icon(Icons.search),
         )
       ];
@@ -79,9 +79,8 @@ class _HomeViewState extends State<HomeView> {
       style: Styles.textStyle20,
       cursorColor: MyColors.myWhite,
       onChanged: (String searchingText) {
-        // TODO
-        // BlocProvider.of<CharactersCubit>(context)
-        //     .searchCharacter(searchingText);
+        BlocProvider.of<CharactersCubit>(context)
+            .searchCharacter(searchingText);
       },
     );
   }

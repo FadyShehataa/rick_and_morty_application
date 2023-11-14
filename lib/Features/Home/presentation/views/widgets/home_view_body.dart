@@ -27,18 +27,17 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             SnackBar(content: Text(state.errMessage)),
           );
         } else if (state is CharactersSuccess) {
-          characters = BlocProvider.of<CharactersCubit>(context).characters;
+          characters =
+              BlocProvider.of<CharactersCubit>(context).searchedCharacters;
         }
       },
       builder: (context, state) {
         if (state is CharactersSuccess ||
             state is CharactersPaginationLoading ||
             state is CharactersPaginationFailure) {
-          if (false
-              // BlocProvider.of<CharactersCubit>(context) // TODO
-              //   .searchedCharacters
-              //   .isEmpty
-              ) {
+          if (BlocProvider.of<CharactersCubit>(context)
+              .searchedCharacters
+              .isEmpty) {
             return const EmptySearchedCharacters();
           } else {
             return CharactersGridView(characters: characters);
