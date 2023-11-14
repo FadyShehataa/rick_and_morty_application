@@ -1,37 +1,37 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../dataaa/models/character/character_model.dart';
-
-import '../../../dataaa/models/character/result.dart';
-import '../../../dataaa/repos/home_repo.dart';
+import 'package:rick_and_morty_application/Features/Home/Domain/Entities/character_entity.dart';
+import 'package:rick_and_morty_application/Features/Home/Domain/use_cases/fetch_characters_use_case.dart';
 
 part 'character_state.dart';
 
 class CharactersCubit extends Cubit<CharactersState> {
-  CharactersCubit(this.homeRepo) : super(CharactersInitial());
+  CharactersCubit(this.fetchCharactersUseCase) : super(CharactersInitial());
 
-  final HomeRepo homeRepo;
-  late final CharacterModel character;
-  late List<Result> searchedCharacters = [];
+  final FetchCharactersUseCase fetchCharactersUseCase;
+
+  late final List<CharacterEntity> characters;
+  late List<CharacterEntity> searchedCharacters = [];
 
   Future<void> searchCharacter(String query) async {
     emit(CharactersSearching());
-    searchedCharacters = character.results!
-        .where((element) =>
-            element.name!.toLowerCase().startsWith(query.toLowerCase()))
+    searchedCharacters = characters
+        .where((element) => element.characterName!
+            .toLowerCase()
+            .startsWith(query.toLowerCase()))
         .toList();
     emit(CharactersSuccess());
   }
 
   Future<void> fetchCharacters() async {
     emit(CharactersLoading());
-    var result = await homeRepo.fetchCharacters();
+    var result = await fetchCharactersUseCase.call();
 
     result.fold(
       (failure) => emit(CharactersFailure(errMessage: failure.errMessage)),
-      (character) {
-        this.character = character;
-        searchedCharacters = character.results!;
+      (characters) {
+        searchedCharacters = characters;
+        this.characters = characters;
         emit(CharactersSuccess());
       },
     );

@@ -1,28 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rick_and_morty_application/Features/Home/Domain/Entities/character_entity.dart';
 
 import '../../../../../Core/utils/app_router.dart';
 import '../../../../../Core/utils/constants.dart';
 import '../../../../../Core/utils/styles.dart';
-import '../../../dataaa/models/character/result.dart';
 
 class CharactersGridViewItem extends StatelessWidget {
-  const CharactersGridViewItem({super.key, required this.characterResultModel});
-  final Result characterResultModel;
+  const CharactersGridViewItem({
+    super.key,
+    required this.characterEntity,
+  });
+
+  final CharacterEntity characterEntity;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         GoRouter.of(context)
-            .push(AppRouter.kCharacterDetailsView, extra: characterResultModel);
+            .push(AppRouter.kCharacterDetailsView, extra: characterEntity);
       },
       child: Hero(
-        tag: characterResultModel.id!,
+        // tag: characterEntity.id!, // TODO
+        tag: characterEntity.characterName!,
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(characterResultModel.image!),
+              image: NetworkImage(characterEntity.characterImage!),
               fit: BoxFit.cover,
             ),
             borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -41,7 +46,7 @@ class CharactersGridViewItem extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(kPadding),
                 child: Text(
-                  characterResultModel.name!,
+                  characterEntity.characterName!,
                   textAlign: TextAlign.center,
                   style: Styles.textStyle16,
                 ),

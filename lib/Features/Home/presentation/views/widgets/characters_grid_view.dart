@@ -8,24 +8,19 @@ class CharactersGridView extends StatelessWidget {
   const CharactersGridView({super.key});
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CharactersCubit, CharactersState>(
-        builder: (context, state) {
-      return GridView.builder(
-        padding: const EdgeInsets.all(kPadding),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.7,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-        ),
-        itemBuilder: (BuildContext context, int index) =>
-            CharactersGridViewItem(
-          characterResultModel: BlocProvider.of<CharactersCubit>(context)
-              .searchedCharacters[index],
-        ),
-        itemCount:
-            BlocProvider.of<CharactersCubit>(context).searchedCharacters.length,
-      );
-    });
+    return GridView.builder(
+      padding: const EdgeInsets.all(kPadding),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.7,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+      ),
+      itemBuilder: (BuildContext context, int index) => CharactersGridViewItem(
+        characterEntity:
+            BlocProvider.of<CharactersCubit>(context).characters[index],
+      ),
+      itemCount: BlocProvider.of<CharactersCubit>(context).characters.length,
+    );
   }
 }

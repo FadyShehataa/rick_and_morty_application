@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:rick_and_morty_application/Features/Home/Domain/Entities/character_entity.dart';
 import 'animated_text.dart';
 import 'character_info.dart';
 import 'custom_divider.dart';
 import '../../../../../Core/utils/constants.dart';
 
-import '../../../dataaa/models/character/result.dart';
-
 class CharacterDetailsViewBody extends StatelessWidget {
-  const CharacterDetailsViewBody(
-      {super.key, required this.characterResultModel});
+  const CharacterDetailsViewBody({super.key, required this.characterEntity});
 
-  final Result characterResultModel;
+  final CharacterEntity characterEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +22,22 @@ class CharacterDetailsViewBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CharacterInfo(
-                    title: 'Status : ', value: characterResultModel.status!),
+                    title: 'Status : ',
+                    value: characterEntity.characterStatus!),
                 const CustomDivider(endIndent: 305),
                 CharacterInfo(
-                    title: 'Species : ', value: characterResultModel.species!),
+                    title: 'Species : ',
+                    value: characterEntity.characterSpecies!),
                 const CustomDivider(endIndent: 290),
                 CharacterInfo(
                     title: 'Type : ',
-                    value: characterResultModel.type!.isEmpty
+                    value: characterEntity.characterType!.isEmpty
                         ? 'Unknown'
-                        : characterResultModel.type!),
+                        : characterEntity.characterType!),
                 const CustomDivider(endIndent: 320),
                 CharacterInfo(
-                    title: 'Gender : ', value: characterResultModel.gender!),
+                    title: 'Gender : ',
+                    value: characterEntity.characterGender!),
                 const CustomDivider(endIndent: 300),
                 const AnimatedText(),
                 const SizedBox(

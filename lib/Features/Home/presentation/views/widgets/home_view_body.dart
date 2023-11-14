@@ -15,9 +15,11 @@ class HomeViewBody extends StatelessWidget {
     return BlocBuilder<CharactersCubit, CharactersState>(
       builder: (context, state) {
         if (state is CharactersSuccess) {
-          if (BlocProvider.of<CharactersCubit>(context)
-              .searchedCharacters
-              .isEmpty) {
+          if (false
+              // BlocProvider.of<CharactersCubit>(context) // TODO
+              //   .searchedCharacters
+              //   .isEmpty
+              ) {
             return const EmptySearchedCharacters();
           } else {
             return const CharactersGridView();
