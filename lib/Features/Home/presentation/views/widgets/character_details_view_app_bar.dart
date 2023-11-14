@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_application/Features/Home/Domain/Entities/character_entity.dart';
 import '../../../../../Core/utils/styles.dart';
@@ -26,9 +27,11 @@ class CharacterDetailsViewAppBar extends StatelessWidget {
         ),
         background: Hero(
           tag: characterEntity.characterImage!,
-          child: Image.network(
-            characterEntity.characterImage!,
-            fit: BoxFit.fill,
+          child: CachedNetworkImage(
+            imageUrl: characterEntity.characterImage!,
+            fit: BoxFit.cover,
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+            height: double.infinity,
           ),
         ),
       ),

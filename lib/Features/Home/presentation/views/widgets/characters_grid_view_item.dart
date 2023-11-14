@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:rick_and_morty_application/Features/Home/Domain/Entities/character_entity.dart';
 
 import '../../../../../Core/utils/app_router.dart';
@@ -23,17 +24,24 @@ class CharactersGridViewItem extends StatelessWidget {
       },
       child: Hero(
         tag: characterEntity.characterImage!,
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(characterEntity.characterImage!),
-              fit: BoxFit.cover,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                child: CachedNetworkImage(
+                  imageUrl: characterEntity.characterImage!,
+                  fit: BoxFit.cover,
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  height: double.infinity,
+                ),
+              ),
             ),
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
-          ),
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
+            Container(
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.black54,
@@ -51,7 +59,7 @@ class CharactersGridViewItem extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );
